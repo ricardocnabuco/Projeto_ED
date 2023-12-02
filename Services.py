@@ -20,3 +20,32 @@ class fila_de_voos:
         self.cabeca = None
         self.cauda = None
         self.tamanho = 0
+
+    def remover_voo_por_codigo(self, codigo):
+        if self.tamanho == 0:
+            print("Fila vazia! Não há voos para remover!")
+            return 
+        
+        atual = self.cabeca
+
+        while atual:
+            if atual.codigo == codigo:
+                if atual.prox:
+                    atual.prox.ulti = atual.ulti 
+                else:
+                    self.cauda = atual.ulti
+
+                if atual.ulti:
+                    atual.ulti.prox = atual.prox
+                else:
+                    self.cabeca = atual.prox
+                
+                self.tamanho -= 1
+                print(f'Voo com código {codigo} removido!')
+                return
+            atual = atual.prox
+        print(f'Voo com código {codigo} não encontrado na fila.')
+
+
+
+
