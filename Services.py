@@ -21,7 +21,7 @@ class fila_de_voos:
         self.cauda = None
         self.tamanho = 0
 
-    def remover_voo_por_codigo(self, codigo):
+    def remocao(self, codigo):
         if self.tamanho == 0:
             print("Fila vazia! Não há voos para remover!")
             return 
