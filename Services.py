@@ -49,3 +49,19 @@ class fila_de_voos:
 
 
 
+# Ordenação
+    def insertion_sort(self, fila):
+        for _ in range(self.tamanho):
+            noh_ref = self.cabeca
+            noh_comparador = self.cabeca.prox
+            ancora = noh_comparador.prox
+            while self.noh_ref.ulti and noh_ref.horario > noh_comparador.horario
+                #atualização dos ponteiros
+                noh_comparador.ulti = noh_ref.ulti
+                noh_ref.ulti = noh_comparador
+                noh_ref.prox = noh_comparador.prox
+                noh_comparador.prox = noh_ref
+                # atualização da refetencia
+                noh_ref = nof_comparador.ulti
+            # atualização do elemento a ser ordenado
+            noh_comparador = ancora 
