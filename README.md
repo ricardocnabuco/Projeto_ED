@@ -1,7 +1,7 @@
 # Introdução do Projeto de Estrutura de Dados
-Título do Projeto --> Gerenciador de Voos Aéreos
+Título do Projeto: Gerenciador de Voos Aéreos
 
-Autores --> Artur Almeida Maldaner, Ricardo de Carvalho Nabuco e Tauã Valentim de Albuquerque Martins Frade
+Autores: Artur Almeida Maldaner, Ricardo de Carvalho Nabuco e Tauã Valentim de Albuquerque Martins Frade
 
 Contexto de Aplicação:
   O algoritmo consiste em uma tabela com, horário, número dos voos, destino e número do portão. Com o intuito de facilitar a visualização dos voos aéreos de um aeroporto para os viajantes
