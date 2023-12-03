@@ -58,7 +58,7 @@ class fila_de_voos:
             self.tamanho -= 1
             print(f'Voo com código {codigo} removido!')
 
-# Insercao
+    # Insercao
     def insercao(self, horario,  codigo, portao, destino=None): # adicionar um no
         self.tamanho += 1
         novo_voo = voo(horario,  codigo, portao, destino=None)
@@ -69,3 +69,36 @@ class fila_de_voos:
         self.cauda.prox = novo_voo
         novo_voo.anterior = self.cauda
         self.cauda = novo_voo
+
+    #Busca
+    # Como dois voos podem compartilhar o mesmo horario e essa variavel é a forma que eles são ordenados se faz necessario um
+    # segundo parametro para a busca
+    def busca_binaria(self, codigo, horario, atual= self.cabeca, passos=(self.tamanho // 2)):
+        if atual == None:
+            print('Voo não encontrado, verifique se não houve nenhum erro de digitação')
+            return
+        for _ in range(passos):
+            atual = atual.prox
+        if atual.mod_horario == modulo_horario(horario):
+            if atual.codigo == codigo: #Verifica se o voo encontrado não é outro com o mesmo horario
+                print(f'Voo {codigo} encontrado.')
+                print(f'Status: {atual.status}')
+                print(f'Horario: {atual.horario}')
+                print(f'Portão: {atual.portao}')
+                if atual.destino:
+                    print(f'Destino: {atual.destino}')
+                return
+            else: # Caso seja verifica os proximos voos, pois pela forma de ordenação é onde estarão
+                self.busca_biniaria(codigo, horario, atual, 1)
+        elif atual.mod_horario >  modulo_horario(horario):
+            self.busca_binaria(codigo, horario, atual, passos//2)
+        else:
+            self.busca_binaria(codigo, horario, self.cabeca, passos//2)
+
+
+
+def modulo_horario(horario):
+    horas, minutos = horario.split(':')
+    horas = int(horas)
+    minutos = int(minutos)
+    return (horas*60) + minutos
