@@ -57,3 +57,15 @@ class fila_de_voos:
                 self.cauda = None
             self.tamanho -= 1
             print(f'Voo com código {codigo} removido!')
+
+# Insercao
+    def insercao(self, horario,  codigo, portao, destino=None): # adicionar um no
+        self.tamanho += 1
+        novo_voo = voo(horario,  codigo, portao, destino=None)
+        if not self.cabeca:
+            self.cabeca = novo_voo
+            self.cauda = novo_voo
+            return
+        self.cauda.prox = novo_voo
+        novo_voo.anterior = self.cauda
+        self.cauda = novo_voo
