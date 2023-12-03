@@ -42,12 +42,15 @@ class fila_de_voos:
             noh_ref, noh_comparador = noh_ref.anterior, noh_ref
 
 # Remoção
-    def remocao(self): # Remover um nó da fila 
+    def remocao(self, codigo): # Remover um nó da fila 
         codigo = self.cabeca.codigo
         if self.tamanho == 0:
             print("Fila vazia! Não há voos para remover!") # Se tiver fila vazia
             return 
+        atual = self.cabeca
         # O voo que estiver na cabeça da fila será removido
+        if atual.codigo == codigo:
+            self.cabeca = atual.prox
         elif self.cabeca.prox:
             self.cabeca.prox.anterior = None
         else:
@@ -118,9 +121,9 @@ class fila_de_voos:
         atual = self.cabeca
         # Imprimir informações de cada voo por linha da tabela das PARTIDAS
         while atual:
-            if not atual.chegando: 
-                print(f'{atual.horario:<10} {atual.codigo:<10} {atual.portao:<10} {atual.destino:<15} {atual.status:<10}')
-            atual = atual.prox
+            
+            print(f'{atual.horario:<10} {atual.codigo:<10} {atual.portao:<10} {atual.destino_origem:<15} {atual.status:<10}')
+        atual = atual.prox
         print("\n" + "=" * 60)
         # Imprimir o cabeçalho da tabela das CHEGADAS 
         print("\nTabela de Chegadas:")
@@ -129,9 +132,9 @@ class fila_de_voos:
         atual = self.cabeca
         while atual:
             # Imprimir informações de cada voo por linha da tabela das CHEGADAS
-            if atual.chegando:
-                print(f'{atual.horario:<10} {atual.codigo:<10} {atual.portao:<10} {atual.destino:<15} {atual.status:<10}')
-            atual = atual.prox
+           
+            print(f'{atual.horario:<10} {atual.codigo:<10} {atual.portao:<10} {atual.destino_origem:<15} {atual.status:<10}')
+        atual = atual.prox
 # Imprimir uma tabela que satisfaça as informações do voo nessa ordem:
 # Horário
 # Código do voo
