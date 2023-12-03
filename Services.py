@@ -47,9 +47,7 @@ class fila_de_voos:
         if self.tamanho == 0:
             print("Fila vazia! Não há voos para remover!") # Se tiver fila vazia
             return 
-        
         atual = self.cabeca
-
         # O voo que estiver na cabeça da fila será removido
         if atual.codigo == codigo: 
             self.cabeca = atual.prox
@@ -57,6 +55,5 @@ class fila_de_voos:
                 self.cabeca.anterior = None
             else:
                 self.cauda = None
-            
             self.tamanho -= 1
             print(f'Voo com código {codigo} removido!')
