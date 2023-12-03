@@ -7,7 +7,7 @@ class voo:
     def __init__(self, horario,  codigo, portao, destino_origem):
         #Informações do voo
         self.horario = horario
-        self.status = 'Previto'
+        self.status = 'Previsto'
         self.destino_origem = destino_origem
         self.codigo = codigo
         self.portao = portao
@@ -103,3 +103,36 @@ class fila_de_voos:
         else:
             self.busca_binaria(codigo, horario, atual, passos//2)
 
+# Travessia
+
+def travessia(self):
+    if self.tamanho == 0:
+        print('Fila vazia! Não há voos para serem percorridos!')
+        return
+    # Imprima o cabeçalho da tabela das PARTIDAS 
+    print("Tabela de PARTIDAS")
+    print(f'{"Horário":<10} {"Código":<10} {"Portão":<10} {"Destino":<15} {"Status":<10}')
+    print("=" * 60)
+    atual = self.cabeca
+    # Imprimir informações de cada voo por linha da tabela das PARTIDAS
+    while atual:
+        if not atual.chegando: 
+            print(f'{atual.horario:<10} {atual.codigo:<10} {atual.portao:<10} {atual.destino:<15} {atual.status:<10}')
+        atual = atual.prox
+    print("\n" + "=" * 60)
+    # Imprimir o cabeçalho da tabela das CHEGADAS 
+    print("\nTabela de Chegadas:")
+    print(f'{"Horário":<10} {"Código":<10} {"Portão":<10} {'Origem':<15} {"Status":<10}')
+    print("=" * 60)
+    atual = self.cabeca
+    while atual:
+        # Imprimir informações de cada voo por linha da tabela das CHEGADAS
+        if atual.chegando:
+            print(f'{atual.horario:<10} {atual.codigo:<10} {atual.portao:<10} {atual.destino:<15} {atual.status:<10}')
+        atual = atual.prox
+# Imprimir uma tabela que satisfaça as informações do voo nessa ordem:
+# Horário
+# Código do voo
+# Portão de embarque
+# Destino 
+# Status do voo
