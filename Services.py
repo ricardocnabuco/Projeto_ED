@@ -7,7 +7,7 @@ class voo:
     def __init__(self, horario,  codigo, portao, destino_origem):
         #Informações do voo
         self.horario = horario
-        self.status = 'Previsto'
+        self.status = 'Previto'
         self.destino_origem = destino_origem
         self.codigo = codigo
         self.portao = portao
@@ -30,32 +30,31 @@ class fila_de_voos:
     def insertion_sort(self):
         noh_ref = self.cauda.anterior
         noh_comparador = self.cauda
-        while noh_ref.anterior and noh_ref.horario > noh_comparador.horario:
-            if noh_comparador.codigo == self.cauda.codigo:
-                self.cauda = noh_ref
-            #atualização dos ponteiros
-            noh_comparador.anterior = noh_ref.anterior
-            noh_ref.anterior = noh_comparador
-            noh_ref.prox = noh_comparador.prox
-            noh_comparador.prox = noh_ref
+        while noh_ref and noh_ref.mod_horario > noh_comparador.mod_horario:
+            #atualização dos valores
+            noh_comparador.horario, noh_ref.horario = noh_ref.horario, noh_comparador.horario
+            noh_comparador.codigo, noh_ref.codigo = noh_ref.codigo, noh_comparador.codigo
+            noh_comparador.destino_origem, noh_ref.destino_origem = noh_ref.destino_origem,  noh_comparador.destino_origem
+            noh_comparador.portao, noh_ref.portao = noh_ref.portao, noh_comparador.portao
+            noh_comparador.status, noh_ref.status = noh_ref.status, noh_comparador.status
+            noh_comparador.mod_horario, noh_ref.mod_horario = noh_ref.mod_horario, noh_comparador.mod_horario
             # atualização da refetencia
-            noh_ref = noh_comparador.anterior
+            noh_ref, noh_comparador = noh_ref.anterior, noh_ref
 
 # Remoção
     def remocao(self): # Remover um nó da fila 
+        codigo = self.cabeca.codigo
         if self.tamanho == 0:
             print("Fila vazia! Não há voos para remover!") # Se tiver fila vazia
             return 
-        atual = self.cabeca
         # O voo que estiver na cabeça da fila será removido
-        if atual.codigo == codigo: 
-            self.cabeca = atual.prox
-            if self.cabeca:
-                self.cabeca.anterior = None
-            else:
-                self.cauda = None
-            self.tamanho -= 1
-            print(f'Voo com código {codigo} removido!')
+        elif self.cabeca.prox:
+            self.cabeca.prox.anterior = None
+        else:
+            self.cauda = None
+        self.cabeca = self.cabeca.prox
+        self.tamanho -= 1
+        print(f'Voo com código {codigo} removido!')
 
     # Insercao
     def insercao(self, horario,  codigo, portao, destino_origem): # adicionar um no
@@ -68,6 +67,9 @@ class fila_de_voos:
         self.cauda.prox = novo_voo
         novo_voo.anterior = self.cauda
         self.cauda = novo_voo
+        # Ordenação
+        self.insertion_sort()
+
 
 
     #Busca
@@ -136,3 +138,19 @@ class fila_de_voos:
 # Portão de embarque
 # Destino 
 # Status do voo
+
+
+
+
+
+
+
+
+
+
+    
+
+        
+
+
+
