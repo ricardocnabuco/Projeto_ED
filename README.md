@@ -11,7 +11,7 @@ O algoritmo consiste em uma tabela que apresenta informações essenciais sobre 
 
 Durante a implementação do algoritmo de gerenciamento, decidimos por aplicar a estrutura da lista encadeada em forma de fila. Neste contexto, designamos o "head" da lista como o primeiro voo exibido na tabela, enquanto o "tail" representa o último. Essa escolha permite a ordenação eficiente dos elementos com base em seus horários, garantindo que a tabela seja apresentada de maneira crescente. Essa estratégia de utilização da lista encadeada em forma de fila proporciona uma gestão eficaz e dinâmica dos voos, contribuindo para a eficiência e desempenho do algoritmo de gerenciamento da tabela de voos aéreos. Com o intuito de manter o algoritmo em ordem crescente, utilizamos a ordenação de insertion sort, por esse algoritmo de ordenação ser especialmente bom para listas parcialmente ordenadas, que é o caso, após cada adição na tabela o algoritmo ajusta a posição do nó movendo as informações dele, para manter a tabela ordenada. Além disso para possibilitar a busca de um voo específica na tabela, utilizamos a busca binária, que permite a recuperação eficiente dos voos desejados para o usuário.  
 
-## Pré Requisitos para Execução:
+## Pré-Requisitos para Execução:
 - Ter o Python 3.0 instalado no computador operante
 - Ter um interpretador python instalado ( Thonny, VsCode, etc)
 
