@@ -1,4 +1,4 @@
-#PROJETO FILA DE CHEGADAS E SAIDAS DE UM AEROPORTO
+#PROJETO FILA DE CHEGADAS E Partidas DE UM AEROPORTO
 
 # NOTAS
 # 0.1: INPLEMENTAÇÃO BASICA DE NO E LISTA DUPLAMENTE ENCADEADA
@@ -42,19 +42,16 @@ class fila_de_voos:
             noh_ref, noh_comparador = noh_ref.anterior, noh_ref
 
 # Remoção
-    def remocao(self, codigo): # Remover um nó da fila 
-        codigo = self.cabeca.codigo
+    def remocao(self): # Remover um nó da fila 
         if self.tamanho == 0:
             print("Fila vazia! Não há voos para remover!") # Se tiver fila vazia
             return 
-        atual = self.cabeca
         # O voo que estiver na cabeça da fila será removido
-        if atual.codigo == codigo:
-            self.cabeca = atual.prox
         elif self.cabeca.prox:
             self.cabeca.prox.anterior = None
         else:
             self.cauda = None
+        codigo = self.cabeca.codigo
         self.cabeca = self.cabeca.prox
         self.tamanho -= 1
         print(f'Voo com código {codigo} removido!')
@@ -78,21 +75,26 @@ class fila_de_voos:
     #Busca
     # Como dois voos podem compartilhar o mesmo horario e essa variavel é a forma que eles são ordenados se faz necessario um
     # segundo parametro para a busca
-    def busca_binaria(self, codigo, horario, atual= -1, passos=-1):
-        aux_horas, aux_minutos = horario.split(':')
-        aux_horas = int(aux_horas)
-        aux_minutos = int(aux_minutos)
-        h_aux = (aux_horas*60) + aux_minutos
+    def busca_binaria(self, codigo, horario, alt_status = False, frente=True, atual= -1, passos=-1):
         if atual == -1 and passos == -1:
             atual = self.cabeca
             passos = self.tamanho // 2
         elif atual == None:
             print('Voo não encontrado, verifique se não houve nenhum erro de digitação')
             return
-        elif passos == 0:
-            passos += 1
         for _ in range(passos):
-            atual = atual.prox
+            if frente:
+                if not atual.prox:
+                    break
+                atual = atual.prox
+            else:
+                if not atual.anterior:
+                    break
+                atual = atual.anterior
+        aux_horas, aux_minutos = horario.split(':')
+        aux_horas = int(aux_horas)
+        aux_minutos = int(aux_minutos)
+        h_aux = (aux_horas*60) + aux_minutos
         if atual.mod_horario == h_aux:
             if atual.codigo == codigo: #Verifica se o voo encontrado não é outro com o mesmo horario
                 print(f'Voo {codigo} encontrado.')
@@ -100,13 +102,15 @@ class fila_de_voos:
                 print(f'Horario: {atual.horario}')
                 print(f'Portão: {atual.portao}')
                 print(f'destino/origem: {atual.destino_origem}')
+                if alt_status:
+                    atual.status = input('Alterar para: ')
                 return
             else: # Caso seja verifica os proximos voos, pois pela forma de ordenação é onde estarão
-                self.busca_binaria(codigo, horario, atual, 1)
+                self.busca_binaria(codigo, horario, True,  atual, 1)
         elif atual.mod_horario >  h_aux:
-            self.busca_binaria(codigo, horario, self.cabeca, passos//2)
+            self.busca_binaria(codigo, horario, alt_status , False, atual.anterior, passos//2)
         else:
-            self.busca_binaria(codigo, horario, atual, passos//2)
+            self.busca_binaria(codigo, horario, alt_status, True, atual.prox, passos//2)
 
 # Travessia
 
@@ -142,4 +146,128 @@ class fila_de_voos:
 # Portão de embarque
 # Destino 
 # Status do voo
-# Exemplo de uso
+
+def deseja_continuar():
+    global rodando
+    print('Tecle o correspondente número para executar as seguintes ações:')
+    print('1. Continuar')
+    print('2. Sair')
+    x = input()
+    if x == 2:
+        rodando = False
+
+def interface():
+    global rodando
+    print('Bem vindo ao gerenciador de voos!')
+    print('Tecle o correspondente número para executar as seguintes ações:')
+    print('1. Adicionar voo')
+    print('2. Remover voo')
+    print('3. Buscar voo')
+    print('4. Emitir tabela de voos')
+    print('5. Editar Status de voo')
+    print('6. Sair')
+    comando = int(input())
+    if comando == 1:
+        print('Tecle o correspondente número para executar as seguintes ações:')
+        print('1. Adicionar voo na tabela das chegadas')
+        print('2. Adicionar voo na tabela das Partidas')
+        comando2 = int(input())
+        if comando2 == 1:
+            print('Por favor informe:')
+            hor = input('Horario previsto de chegada: ')
+            cod = input('Codigo do voo: ')
+            port = input('Portão: ')
+            ori = input('Origem:')
+            fila_chegada.insercao(hor, cod, port, ori)
+        elif  comando2 == 2:
+            print('Por favor informe:')
+            hor = input('Horario previsto de saida: ')
+            cod = input('Codigo do voo: ')
+            port = input('Portão: ')
+            ori = input('Destino: ')
+            fila_saida.insercao(hor, cod, port, ori)
+        else:
+            print('Codigo invalido')
+        deseja_continuar()
+    elif comando == 2:
+        print('Tecle o correspondente número para executar as seguintes ações:')
+        print('1. remover voo na tabela das chegadas')
+        print('2. remover voo na tabela das Partidas')
+        comando2 = int(input())
+        if comando2 == 1:
+            fila_chegada.remocao()
+        elif comando2 == 2:
+            fila_saida.remocao()
+        else:
+            print('Codigo invalido')
+        deseja_continuar()
+    elif comando == 3:
+        print('Tecle o correspondente número para executar as seguintes ações:')
+        print('1. Buscar voo na tabela das chegadas')
+        print('2. Buscar voo na tabela das Partidas')
+        comando2 = int(input())
+        print('Por favor informe:')
+        cod = input('Codigo do voo: ')
+        hor = input('Horario do voo:')
+        if comando2 == 1:
+            fila_chegada.busca_binaria(cod, hor)
+        elif comando2 == 2:
+            fila_saida.busca_binaria(cod, hor)
+        else:
+            print('Codigo invalido')
+        deseja_continuar()
+    elif comando == 4:
+        print('Tecle o correspondente número para executar as seguintes ações:')
+        print('1. Emitir tabela de chegadas')
+        print('2. Emitir tabela de Partidas')
+        comando2 = int(input())
+        if comando2 == 1:
+            fila_chegada.travessia(1)
+        elif comando2 == 2:
+            fila_saida.travessia(2)
+        else:
+            print('Codigo invalido')
+        deseja_continuar()
+    elif comando == 5:
+        print('Tecle o correspondente número para executar as seguintes ações:')
+        print('1. Editar voo na tabela das chegadas')
+        print('2. Editar voo na tabela das Partidas')
+        comando2 = int(input())
+        print('Por favor informe:')
+        cod = input('Codigo do voo: ')
+        hor = input('Horario do voo:')
+        if comando2 == 1:
+            fila_chegada.busca_binaria(cod, hor, True)
+        elif comando2 == 2:
+            fila_saida.busca_binaria(cod, hor, True)
+        else:
+            print('Codigo invalido')
+        deseja_continuar()
+    elif comando == 6:
+        rodando = False
+        return
+    else:
+        print('Codigo invalido')
+        deseja_continuar()
+    return
+
+
+
+
+
+fila_saida = fila_de_voos()
+fila_chegada = fila_de_voos()
+
+
+rodando = True
+while rodando:
+    interface()
+
+
+
+    
+
+        
+
+
+
