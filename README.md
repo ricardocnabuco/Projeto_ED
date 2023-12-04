@@ -28,7 +28,7 @@ Ao executar o programa pela primeira vez, perceberá que algumas opções são e
 
 
 ### 1 . Adicionar voo
-Caso o usuário escolher a primeira opção, de adicionar um voo, a interface vai mostrar duas opções, a de adicionar um voo na tabela de chegadas e de adicionar um voo na tabela de partida.
+Caso o usuário escolher a primeira opção, de adicionar um voo, a interface vai mostrar duas opções, a de adicionar um voo na tabela de chegadas e de adicionar um voo na tabela de partida. O horario previsto de chegada ou partida do voo deve ser informado no formato hh:mm.
 
 ![image](https://github.com/ricardocnabuco/Projeto_ED/assets/33905219/8b88382b-f212-4dd2-b35f-9d6c2f4ad2a9)
 
