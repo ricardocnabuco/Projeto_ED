@@ -166,12 +166,12 @@ def interface():
     print('4. Emitir tabela de voos')
     print('5. Editar Status de voo')
     print('6. Sair')
-    comando = int(input())
+    comando = int(input("Digite seu número aqui: "))
     if comando == 1:
         print('Tecle o correspondente número para executar as seguintes ações:')
-        print('1. Adicionar voo na tabela das chegadas')
+        print('1. Adicionar voo na tabela das Chegadas')
         print('2. Adicionar voo na tabela das Partidas')
-        comando2 = int(input())
+        comando2 = int(input("Digite seu número aqui: "))
         if comando2 == 1:
             print('Por favor informe:')
             hor = input('Horario previsto de chegada: ')
@@ -191,9 +191,9 @@ def interface():
         deseja_continuar()
     elif comando == 2:
         print('Tecle o correspondente número para executar as seguintes ações:')
-        print('1. remover voo na tabela das chegadas')
+        print('1. remover voo na tabela das Chegadas')
         print('2. remover voo na tabela das Partidas')
-        comando2 = int(input())
+        comando2 = int(input("Digite seu número aqui: "))
         if comando2 == 1:
             fila_chegada.remocao()
         elif comando2 == 2:
@@ -203,9 +203,9 @@ def interface():
         deseja_continuar()
     elif comando == 3:
         print('Tecle o correspondente número para executar as seguintes ações:')
-        print('1. Buscar voo na tabela das chegadas')
+        print('1. Buscar voo na tabela das Chegadas')
         print('2. Buscar voo na tabela das Partidas')
-        comando2 = int(input())
+        comando2 = int(input("Digite seu número aqui: "))
         print('Por favor informe:')
         cod = input('Codigo do voo: ')
         hor = input('Horario do voo:')
@@ -218,9 +218,9 @@ def interface():
         deseja_continuar()
     elif comando == 4:
         print('Tecle o correspondente número para executar as seguintes ações:')
-        print('1. Emitir tabela de chegadas')
+        print('1. Emitir tabela de Chegadas')
         print('2. Emitir tabela de Partidas')
-        comando2 = int(input())
+        comando2 = int(input("Digite seu número aqui: "))
         if comando2 == 1:
             fila_chegada.travessia(1)
         elif comando2 == 2:
@@ -230,9 +230,9 @@ def interface():
         deseja_continuar()
     elif comando == 5:
         print('Tecle o correspondente número para executar as seguintes ações:')
-        print('1. Editar voo na tabela das chegadas')
+        print('1. Editar voo na tabela das Chegadas')
         print('2. Editar voo na tabela das Partidas')
-        comando2 = int(input())
+        comando2 = int(input("Digite seu número aqui: "))
         print('Por favor informe:')
         cod = input('Codigo do voo: ')
         hor = input('Horario do voo:')
